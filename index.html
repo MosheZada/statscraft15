@@ -1,1 +1,1133 @@
-My Page
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="remark,remarkjs,markdown,slideshow,presentation" />
+    <meta name="description" content="A simple, in-browser, markdown-driven slideshow tool." />
+    <title>Remark</title>
+    <script src="mermaid.min.js"></script> 
+    <script>mermaid.initialize({startOnLoad:true});</script>
+            <link rel="stylesheet" type="text/css" href="mermaid.css">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content { padding: 0 0 0 10px;}
+      .remark-slide-content h1 { font-size: 3em;}
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .buzz { color: #007CBF;}
+      .cyan { color: #2EC4B6;}
+      .red   { color: #fa0000; }
+      .title {color: #02314A;}
+      .green { color: #129490;}
+      .large { font-size: 2em; }
+      .ping {color: rgb(249, 38, 114);}
+      .bg-aphyr {
+        background-image:url(img/aphyr.jpeg);
+      }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 40%;
+      }
+      .pull-right {
+        float: right;
+        width: 43%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #02314A;
+        color: #03477F;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 17%;
+        height: 100%;
+        float: left;
+        font-size: 0.8em;
+        padding: 0px 0px 0px 0px !important;
+      }
+      .left-column h2:last-of-type {
+        color: #0A6E00;
+      }
+      .left-column h3:last-child {
+        color: #5EA20B;
+      }
+      .right-column {
+        width: 83%;
+        float: left;
+        top: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+#(Monitoring (and
+#(alerting (with
+# riemann))))
+[.cyan[Moshe Zada@Forter]]
+---
+layout: false
+.left-column[
+  ## riemann@forter
+  ### Who am I
+]
+.right-column[
+### .title[Moshe Zada]
+  - .buzz[Problem solver]@Forter
+  - Works at Forter for 1 year
+  - Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack
+  ]
+---
+.left-column[
+  ## riemann@forter
+  ### Who am I
+  ### And where do I work
+]
+.right-column[
+### .title[Forter]
+Forter delivers a plug and play technology which allows online merchants to get a simple approve/decline answer for every transaction.
+
+The company is based in Tel Aviv, Israel.]
+![Prototypal Inheritance 2](img/ocean.jpg)
+
+---
+.left-column[
+  ## riemann@forter
+  ### Who am I
+  ### And where do I work
+  ### Tech
+]
+.right-column[
+### .title[Tech@Forter]
+  - Immutable images
+  - Averege of 4 production deployments in single day
+  - Every environment has its own "probe-machine" (even feature branches)
+  - Using .buzz[Storm] for transactions and click stream proccesing
+  - .buzz[Couchbase], .buzz[Elasticsearch], .buzz[Redis], .buzz[MySQL] as datastores
+  - Using .buzz[ELK] for visabillity
+  - .buzz[PagerDuty] as alerting and on-call scheduling
+  ]
+  .left-column[![Prototypal Inheritance 2](img/overall_latency.png)]
+---
+.left-column[
+  ## riemann@forter
+  ### Who am I
+  ### And where do I work
+  ### Tech
+  ### Two days before
+]
+.right-column[
+### .title[Two days before (the first) customer what can go wrong ?]
+- Running on ec2, no failover plan 
+- Developer SSH into the production machine
+- Developer changes DB schema
+- Analyst changes stored procedures
+- Analyst run long running queries on DB for research
+- 3rd party API may stop working
+- Exceptions written to local log file
+
+]
+---
+template: inverse
+
+## Riemann - Basic Concepts
+---
+.left-column[
+## Basic Concepts
+### - Riemann
+]
+.right-column[
+### .title[Riemann is an event stream processor.]
+Just handled an HTTP request?  
+-> **Send an event with the time it took.**  
+Caught an exception?  
+-> **Send an event with the stacktrace.**  
+]
+--
+.right-column[
+![Prototypal Inheritance 2](img/aphyr.jpeg)
+]
+---
+.left-column[
+## Basic Concepts
+### - Riemann
+### - Event
+]
+.right-column[
+### .title[Events]
+- Events are just structs.
+- They're sent over Protocol Buffers
+- and in Riemann are treated as immutable maps.
+
+
+  ```protobuff
+message Event {
+  optional int64 time = 1;
+  optional string state = 2;
+  optional string service = 3;
+  optional string host = 4;
+  optional string description = 5;
+  repeated string tags = 7;
+  optional float ttl = 8;
+  repeated Attribute attributes = 9;
+  optional sint64 metric_sint64 = 13;
+  optional double metric_d = 14;
+  optional float metric_f = 15;
+}
+
+message Attribute {
+  required string key = 1;
+  optional string value = 2;
+}
+  ```
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+]
+.right-column[
+### .title[Sample events]
+* Collectd event
+```json
+{
+    "service": "prod-redis-n01 Free memory",
+    "host": "10.0.0.1",
+    "description": "total memory free in bytes",
+    "state": nil,
+    "ttl": 60,
+    "metric": 1024,
+    "tags": ["collectd",
+              "redis",
+              "infra"]
+}
+```
+* System test free instrumentation event
+```json
+{
+    "service": "prod-gateway-n01 MerchantSanity system test",
+    "host": "10.0.0.2",
+    "description": "Check forters merchants api",
+    "state": "failure",
+    "ttl": 60,
+    "metric": 0,
+    "tags": ["test",
+              "merchantSanity"]
+}
+```
+]
+
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+### - The index
+]
+.right-column[
+### .title[The index]
+The index is a table of the current state of all services tracked by Riemann.   
+
+|        key          |                      event                             |
+|---------------------|:------------------------------------------------------:|
+| 10.0.0.1-redis-free | {.. "metric":"5", "service":"10.0.0.1-redis-free" .. } |
+| 10.0.0.2-cache-miss | {.. "metric":"6", "service":"10.0.0.1-redis-free" .. } |
+| 10.0.0.2-cache-hit  | {.. "metric":"6", "service":"10.0.0.1-redis-free" .. } |
+
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+### - The index
+### - TTL
+]
+.right-column[
+### .title[TTL]
+Events entered into the index have a :ttl field which indicate how long that event is valid for.
+
+{"service": "foobar", "ttl": 60, state:"pass"} -> "index"   
+after 60 secs   
+{"service": "foobar", "ttl": 60, state:"**expired**"} -> "index"
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+### - The index
+### - TTL
+### - Clojure
+]
+.right-column[
+.pull-left[
+### .title[Python]
+```python
+*print("Hi")
+```
+```python
+1 + 2
+```
+```python
+foo(str(1), 2)
+```
+]
+.pull-left[
+### .title[Clojure]
+```clojure
+*(println "Hi")
+```
+```clojure
+(+ 1 2)
+```
+```clojure
+(foo (str 1) 2)
+```
+]
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+### - The index
+### - TTL
+### - Clojure
+]
+.right-column[
+.pull-left[
+### .title[Python]
+```python
+print("Hi")
+```
+```python
+*1 + 2
+```
+```python
+foo(str(1), 2)
+```
+]
+.pull-left[
+### .title[Clojure]
+```clojure
+(println "Hi")
+```
+```clojure
+*(+ 1 2)
+```
+```clojure
+(foo (str 1) 2)
+```
+]
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Riemann
+### - Event
+### - Examples
+### - The index
+### - TTL
+### - Clojure
+]
+.right-column[
+.pull-left[
+### .title[Python]
+```python
+print("Hi")
+```
+```python
+1 + 2
+```
+```python
+*foo(str(1), 2)
+```
+]
+.pull-left[
+### .title[Clojure]
+```clojure
+(println "Hi")
+```
+```clojure
+(+ 1 2)
+```
+```clojure
+*(foo (str 1) 2)
+```
+]
+]
+---
+template: inverse
+## merchantSanity - Implement simple state machine
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ]
+.ight-column[
+### .title[merchantSanity]
+Riemann will forward to pagerduty only events that they state was chenged
+```json
+{
+ "service": "prod-gateway-n01 MerchantSanity system test",
+ "host": "10.0.0.2",
+ "description": "Check forters merchants api",
+ "state": "failure",
+ "ttl": 60,
+ "metric": 0,
+ "tags": ["test",
+          "merchantSanity"]
+}```]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ]
+.right-column[
+  ### .title[Flow]
+  "probe machine" --> "riemann" --> "pagerduty"
+]
+--
+.right-column[
+### .title[The code behind]
+  ```clojure    
+(tagged "merchantSanity"
+  pagerduty-test-dispatch "asdasdad")
+
+(defn pagerduty-test-dispatch
+ "Constructs a pagerduty stream which resolves and"
+ "triggers alerts based on test failure"
+ [key]
+ (let [pd (pagerduty "merchantSanity-service-key")]
+  (changed-state
+    (where (state "ok")
+      (:resolve pd))
+    (where (state "failure")
+      (:trigger pd))))
+```
+        ]
+---
+template: inverse
+## when things break, they submit a \*ton\* of events, how can I throttle them?
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch
+  ### Test dispatch - throttled
+  ]
+.right-column[
+  ### .title[Avoiding throttling]
+  ```clojure
+    ; If changed state
+*   (changed-state {:init "passed"} 
+*    ; and the state 120
+*     (where (state "passed") (:resolve pd)))
+
+    ; If the state of the event is failed
+    (where (state "failed")
+      ; group by host and service fields
+      ; pass only one event in 60 seconds
+      (by [:host :service] 
+        (throttle 1 60 (:trigger pd))))))
+```
+]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch
+  ### Test dispatch - throttled
+  ]
+.right-column[
+  ### .title[Avoiding throttling]
+  *Sometimes, when things break, they submit a *ton* of events.*   
+  ```clojure
+    ; If changed state
+    (changed-state {:init "passed"} 
+      ; and the state in passed - resolve
+      (where (state "passed") (:resolve pd)))
+
+    ; If the state of the event is failed
+*   (where (state "failed")
+*    ; group by host120
+*     ; pass only one event in 60 seconds
+*     (by [:host :service] 
+*       (throttle 1 60 (:trigger pd))))))
+```
+]
+---
+template: inverse
+## How can I ignore spikes (statistical alert)?
+![Prototypal Inheritance 2](img/spike.png)
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch
+  ### Test dispatch - throttled
+  ### CPU spikes
+  ]
+.right-column[
+### .title[Monitoring Infra - ignore spikes]
+.buzz[Collectd] gether our instance cpu info   
+If >30% failed - Trigger
+]
+--
+.right-column[
+```clojure
+(defn pagerduty-probe-dispatch
+ [key]
+    ...
+*  (fixed-time-window 120
+    ...
+    (assoc (first events)
+        {:metric  fraction
+         :state   (condp < fraction
+                    0.3  "failed"
+                    0.05 "warning"
+                         "passed")})
+       (pagerduty-test-dispatch key)))
+```
+]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch
+  ### Test dispatch - throttled
+  ### CPU spikes
+  ]
+.right-column[
+### .title[Monitoring Infra - ignore spikes]
+.buzz[Collectd] gether our instance cpu info   
+If >30% failed - Trigger
+]
+.right-column[
+```clojure
+(defn pagerduty-probe-dispatch
+ [key]
+    ...
+   (fixed-time-window 120
+    ...
+*   (assoc (first events)
+*       {:metric  fraction
+         :state   (condp < fraction
+                    0.3  "failed"
+                    0.05 "warning"
+                         "passed")})
+       (pagerduty-test-dispatch key)))
+```
+]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch
+  ### Test dispatch - throttled
+  ### CPU spikes
+  ]
+.right-column[
+### .title[Monitoring Infra - ignore spikes]
+.buzz[Collectd] gether our instance cpu info   
+If >30% failed - Trigger
+]
+.right-column[
+```clojure
+(defn pagerduty-probe-dispatch
+ [key]
+    ...
+   (fixed-time-window 120
+    ...
+    (assoc (first events)
+        {:metric  fraction
+*        :state   (condp < fraction
+*                   0.3  "failed"
+*                   0.05 "warning"
+*                        "passed")})
+       (pagerduty-test-dispatch key)))
+```
+]
+--
+.right-column[
+### .title[Usage]
+```clojure
+(tagged "merchantSanity"
+    (pagerduty-test-dispatch "3adab5c52e1511e5a"))
+(tagged-all ["collectd", "cpu"]
+    (pagerduty-probe-dispatch "4a6b58212e1511e5b" 120))
+```
+]
+---
+template: inverse
+## Visualize
+![Prototypal Inheritance 2](img/bathman.jpeg)
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+]
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+- http://github.com/forter/georg   
+
+
+![Prototypal Inheritance 2](img/d3_storm.png)
+]
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+- http://github.com/forter/georg
+- http://github.com/forter/riemann-testng-listener   
+
+
+
+![Prototypal Inheritance 2](img/github.png)
+]
+---
+name: visualize
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ]
+.right-column[
+### .title[Stream to ELK]
+```clojure
+(where
+  (and
+    (not (tagged-any ["kibanaIgnore"]))
+    (not (state "expired")))
+    (logstash {:host "127.0.0.1"
+               :pool-size 20
+               :claim-timeout 0.2})
+```
+]
+
+--
+.right-column[
+![Prototypal Inheritance 2](img/freestyle.png)
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+]
+.right-column[
+### .title[How do I query?]
+\*prod\* ?  
+\*nimbus\* ?  
+\*merchantSanity\* ?  
+]
+--
+.right-column[
+`branch` : `prod`   
+`role` : `nimbus`   
+`deployitme` : `2015-07-19T1918`   
+]
+--
+.right-column[
+```json
+{
+* "service": "prod-nimbus-instance-2015-07-19T1918 df-mnt/percent_bytes-free",
+  "host": "ip-10-139-118-128",
+  "metric": 100,
+  "tags": ["collectd"],
+  "time": "2015-07-19T16:45:58.000Z",
+  "ttl": 240,
+  "plugin": "df"
+}
+```
+So lets split the service field !  
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+]
+.right-column[
+### Usage
+```clojure
+(where
+  (and
+    (not (tagged-any ["kibanaIgnore"]))
+    (not (state "expired")))
+*   (enrich (logstash {:host "127.0.0.1"
+               :pool-size 20
+               :claim-timeout 0.2}))
+```
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+]
+
+.right-column[
+### .title[Enrich]
+```clojure
+(defn enrich
+  "Parse environment settings from service name prefix"
+  [& children]
+    (apply smap
+      (fn stream [event]
+        (let [
+*         regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
+*         [all branch role deploytime subservice] (re-find #regex (:service event))
+*         is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
+          ]
+            (assoc event :env        (str branch "-" deploytime)
+                         :branch     branch
+                         :deploytime deploytime
+                         :role       role
+                         :subservice subservice
+                         :test is-test)))
+    children))
+```
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+]
+
+.right-column[
+### .title[Enrich]
+```clojure
+(defn enrich
+  "Parse environment settings from service name prefix"
+  [& children]
+    (apply smap
+      (fn stream [event]
+        (let [
+          regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
+          [all branch role deploytime subservice] (re-find #regex (:service event))
+          is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
+          ]
+*           (assoc event :env        (str branch "-" deploytime)
+*                        :branch     branch
+*                        :deploytime deploytime
+*                        :role       role
+*                        :subservice subservice
+*                        :test is-test)))
+    children))
+```
+]
+
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+]
+
+.right-column[
+### .title[Enrich]
+```clojure
+(defn enrich
+  "Parse environment settings from service name prefix"
+  [& children]
+    (apply smap
+      (fn stream [event]
+        (let [
+          regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
+          [all branch role deploytime subservice] (re-find #regex (:service event))
+          is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
+          ]
+            (assoc event :env        (str branch "-" deploytime)
+                         :branch     branch
+                         :deploytime deploytime
+                         :role       role
+                         :subservice subservice
+                         :test is-test)))
+    children))
+```
+```json
+{
+  "service": "prod-nimbus-instance-2015-07-19T1918/df-mnt/percent_bytes-free",
+* "env": "prod-2015-07-19T1918",
+* "branch": "prod",
+* "deploytime": "2015-07-19T1918",
+* "role": "nimbus",
+* "subservice": "df-mnt/percent_bytes-free",
+  "host": "ip-10-139-118-128",
+  "metric": 100
+}
+```
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+### - Result
+]
+.right-column[
+### .title[Latency grouped by deploytime]
+![Prototypal Inheritance 2](img/percentiles.png)
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+### - Result
+]
+.right-column[
+### .title[Event count grouped by env]
+![Prototypal Inheritance 2](img/byhost.png)
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+### - Result
+]
+.right-column[
+### .title[Exception histogram by subservice]
+![Prototypal Inheritance 2](img/exception_histo.png)
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+### - Result
+]
+.right-column[
+### .title[Collectd CPU usage by CPU id]
+![Prototypal Inheritance 2](img/cpu.png)
+]
+---
+.left-column[
+## Visualize
+### - Stream to ELK
+### - Prepare for ELK
+### - Result
+]
+.right-column[
+### .title[Filters]
+![Prototypal Inheritance 2](img/filter_prod.png)
+]
+--
+.right-column[
+![Prototypal Inheritance 2](img/filter_test.png)
+]
+---
+.left-column[
+## Back to tests
+### - Maintenance
+]
+.right-column[
+### .title[Maintenance Mode]
+]
+--
+.right-column[
+- Sending "maintenance-mode" event
+- Riemann query its own index for the "maintenance-mode" event  
+  if exist - ignore
+]
+--
+.right-column[
+Enable:
+```json
+{
+  "service": "prod-2015-07-19T1918 maintenance-mode",
+  "ttl": 120,
+  "state": "active"
+}
+```
+]
+--
+.right-column[
+And usage:
+```clojure
+(where  (and (state "failed")
+            (not (maintenance-mode (str (:env event) " maintenance-mode"))))
+        (:trigger pd))
+```
+]
+---
+.left-column[
+  ## Back to tests
+  ### - Maintenance
+  ### - Avoiding throttling
+  ### - Manual resolve
+  ]
+.right-column[
+  ### .title[Manual resolve events]
+  ```clojure
+(defn pagerduty-manual-resolve
+   "Constructs a pagerduty stream which triggers"
+   "fatal alerts that needs manual resolution"
+   [key]
+   (enrich
+     (let [pd (custom-pagerduty key)]
+         (where (not (maintenance-mode (str (:env event) " maintenance-mode")))
+           (throttle 1 60
+              (:trigger pd))))))
+  ```
+
+```clojure
+(where (tagged "fatal-exception")
+  (pagerduty-manual-resolve "46582d452e1511e58"))
+```
+]
+---
+.left-column[
+  ## Back to tests
+  ### - Maintenance
+  ### - Avoiding throttling
+  ### - Manual resolve
+  ### - Periodic reporters
+  ]
+.right-column[
+  ### .title[Periodic reporters]
+  ```clojure
+(defn pagerduty-cron-expiration
+"Constructs a pagerduty stream which resolves"
+"and triggers alerts based on event expiration"
+[key]  
+(let [pd (custom-pagerduty key)]
+  (where (expired? event)
+    (with {:state "failed"
+           :description "TTL Expired. Check that the cron service is running."}
+        (pagerduty-test-dispatch key))
+    (else
+        (pagerduty-test-dispatch key)))))
+```
+]
+---
+.left-column[
+  ## aggregations
+  ]
+.right-column[
+  ### .title[Aggregate throughput events]
+  Lots of same event, want to sum them/ count them/ filter the max]
+--
+.right-column[
+```clojure
+; aggregate max latency for throughput latency events
+(tagged "latency"·
+ (fixed-time-window 2
+    (smap folds/maximum
+      (apply adjust [:service str " maximum"]·
+        children))))
+
+ ; aggregate sum throughput events
+(tagged-any ["throughput", "bulk-size"]
+ (fixed-time-window 2
+   (smap folds/sum
+       (apply adjust [:service str " sum"]
+        children))))
+```
+]
+---
+.left-column[
+  ## aggregations
+  ]
+.right-column[
+  ### .title[Aggrigate throughput events]
+  Lots of same event, want to sum them/ count them/ filter the max
+```clojure
+; aggregate max latency for throughput latency events
+*(tagged "latency"·
+* (fixed-time-window 2
+    (smap folds/maximum
+      (apply adjust [:service str " maximum"]·
+        children))))
+
+ ; aggregate sum throughput events
+*(tagged-any ["throughput", "bulk-size"]
+* (fixed-time-window 2
+   (smap folds/sum
+       (apply adjust [:service str " sum"]
+        children))))
+```
+]
+---
+.left-column[
+  ## aggregations
+  ]
+.right-column[
+  ### .title[Aggrigate throughput events]
+  Lots of same event, want to sum them/ count them/ filter the max
+```clojure
+; aggregate max latency for throughput latency events
+(tagged "latency"·
+  (fixed-time-window 2
+*   (smap folds/maximum
+      (apply adjust [:service str " maximum"]·
+*       children))))
+
+ ; aggregate sum throughput events
+(tagged-any ["throughput", "bulk-size"]
+  (fixed-time-window 2
+*  (smap folds/sum
+       (apply adjust [:service str " sum"]
+*       children))))
+```
+]
+---
+.left-column[
+  
+  ]
+.right-column[
+### TODO
+* Add problem slide  
+* Change to forter font  
+* Make incremental count
+* bigger font (18+)
+]
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+name: last-page
+template: inverse
+
+## That's all folks (for now)!
+
+Slideshow created using [remark](http://github.com/gnab/remark).
+    </textarea>
+
+    <script src="remark-latest.min.js"></script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="remark.language.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'sunburst',
+          highlightLanguage: 'clojure',
+          ratio: '14:9',
+          scroll: true,
+          highlightLines: true
+        }) ;
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-44561333-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.scripts[0];
+        s.parentNode.insertBefore(ga, s);
+      }());
+    </script>
+  </body>
+</html>
