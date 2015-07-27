@@ -20,14 +20,18 @@
         font-family: 'Yanone Kaffeesatz';
         font-weight: 400;
         margin-bottom: 0;
+        margin-top: 14px;
       }
-      .remark-slide-content { padding: 0 0 0 10px;}
+      .remark-slide-content {
+        padding: 0 0 0 10px;
+      }
       .remark-slide-content h1 { font-size: 3em;}
       .remark-slide-content h2 { font-size: 2em; }
       .remark-slide-content h3 { font-size: 1.6em; }
       .footnote {
         position: absolute;
-        bottom: 3em;
+        bottom: 1em;
+        font-size: 18px;
       }
       li p { line-height: 1.25em; }
       .buzz { color: #007CBF;}
@@ -48,7 +52,10 @@
         background: #e7e8e2;
         border-radius: 5px;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+        font-size: 22px;
+      }
       .remark-code-line-highlighted     { background-color: #373832; }
       .pull-left {
         float: left;
@@ -116,7 +123,7 @@
       /* Two-column layout */
       .left-column {
         color: #777;
-        width: 17%;
+        width: 15%;
         height: 100%;
         float: left;
         font-size: 0.8em;
@@ -129,9 +136,10 @@
         color: #5EA20B;
       }
       .right-column {
-        width: 83%;
+        width: 82%;
         float: left;
         top: 20%;
+        font-size: 24px;
       }
     </style>
   </head>
@@ -148,7 +156,7 @@ class: center, middle, inverse
 ---
 layout: false
 .left-column[
-  ## riemann@forter
+  ## riemann@ forter
   ### Who am I
 ]
 .right-column[
@@ -159,7 +167,7 @@ layout: false
   ]
 ---
 .left-column[
-  ## riemann@forter
+  ## riemann@ forter
   ### Who am I
   ### And where do I work
 ]
@@ -172,10 +180,11 @@ The company is based in Tel Aviv, Israel.]
 
 ---
 .left-column[
-  ## riemann@forter
+  ## riemann@ forter
   ### Who am I
   ### And where do I work
   ### Tech
+
 ]
 .right-column[
 ### .title[Tech@Forter]
@@ -190,10 +199,22 @@ The company is based in Tel Aviv, Israel.]
   .left-column[![Prototypal Inheritance 2](img/overall_latency.png)]
 ---
 .left-column[
-  ## riemann@forter
+  ## riemann@ forter
   ### Who am I
   ### And where do I work
   ### Tech
+  ### How latency effect Forter
+  ]
+.right-column[
+### .title[Realtime DAAS]
+]
+---
+.left-column[
+  ## riemann@ forter
+  ### Who am I
+  ### And where do I work
+  ### Tech
+  ### How latency effect Forter
   ### Two days before
 ]
 .right-column[
@@ -210,11 +231,12 @@ The company is based in Tel Aviv, Israel.]
 ---
 template: inverse
 
-## Riemann - Basic Concepts
+# Riemann - Basic Concepts
 ---
 .left-column[
 ## Basic Concepts
 ### - Riemann
+.footnote[riemann as pipes]
 ]
 .right-column[
 ### .title[Riemann is an event stream processor.]
@@ -284,19 +306,6 @@ message Attribute {
               "infra"]
 }
 ```
-* System test free instrumentation event
-```json
-{
-    "service": "prod-gateway-n01 MerchantSanity system test",
-    "host": "10.0.0.2",
-    "description": "Check forters merchants api",
-    "state": "failure",
-    "ttl": 60,
-    "metric": 0,
-    "tags": ["test",
-              "merchantSanity"]
-}
-```
 ]
 
 ---
@@ -336,122 +345,15 @@ after 60 secs
 {"service": "foobar", "ttl": 60, state:"**expired**"} -> "index"
 ]
 ---
-.left-column[
-  ## Basic Concepts
-### - Riemann
-### - Event
-### - Examples
-### - The index
-### - TTL
-### - Clojure
-]
-.right-column[
-.pull-left[
-### .title[Python]
-```python
-*print("Hi")
-```
-```python
-1 + 2
-```
-```python
-foo(str(1), 2)
-```
-]
-.pull-left[
-### .title[Clojure]
-```clojure
-*(println "Hi")
-```
-```clojure
-(+ 1 2)
-```
-```clojure
-(foo (str 1) 2)
-```
-]
-]
----
-.left-column[
-  ## Basic Concepts
-### - Riemann
-### - Event
-### - Examples
-### - The index
-### - TTL
-### - Clojure
-]
-.right-column[
-.pull-left[
-### .title[Python]
-```python
-print("Hi")
-```
-```python
-*1 + 2
-```
-```python
-foo(str(1), 2)
-```
-]
-.pull-left[
-### .title[Clojure]
-```clojure
-(println "Hi")
-```
-```clojure
-*(+ 1 2)
-```
-```clojure
-(foo (str 1) 2)
-```
-]
-]
----
-.left-column[
-  ## Basic Concepts
-### - Riemann
-### - Event
-### - Examples
-### - The index
-### - TTL
-### - Clojure
-]
-.right-column[
-.pull-left[
-### .title[Python]
-```python
-print("Hi")
-```
-```python
-1 + 2
-```
-```python
-*foo(str(1), 2)
-```
-]
-.pull-left[
-### .title[Clojure]
-```clojure
-(println "Hi")
-```
-```clojure
-(+ 1 2)
-```
-```clojure
-*(foo (str 1) 2)
-```
-]
-]
----
 template: inverse
-## merchantSanity - Implement simple state machine
+# merchantSanity - 
+# Implement simple state machine
 ---
 .left-column[
   ## Probes and tests
   ### Simple test
   ]
-.ight-column[
+.right-column[
 ### .title[merchantSanity]
 Riemann will forward to pagerduty only events that they state was chenged
 ```json
@@ -495,63 +397,62 @@ Riemann will forward to pagerduty only events that they state was chenged
         ]
 ---
 template: inverse
-## when things break, they submit a \*ton\* of events, how can I throttle them?
+# when things break, they submit a \*ton\* of events
+# how can I throttle them?
 ---
 .left-column[
   ## Probes and tests
   ### Simple test
-  ### Test dispatch
-  ### Test dispatch - throttled
-  ]
-.right-column[
-  ### .title[Avoiding throttling]
-  ```clojure
-    ; If changed state
-*   (changed-state {:init "passed"} 
-*    ; and the state 120
-*     (where (state "passed") (:resolve pd)))
-
-    ; If the state of the event is failed
-    (where (state "failed")
-      ; group by host and service fields
-      ; pass only one event in 60 seconds
-      (by [:host :service] 
-        (throttle 1 60 (:trigger pd))))))
-```
-]
----
-.left-column[
-  ## Probes and tests
-  ### Simple test
-  ### Test dispatch
   ### Test dispatch - throttled
   ]
 .right-column[
   ### .title[Avoiding throttling]
   *Sometimes, when things break, they submit a *ton* of events.*   
   ```clojure
-    ; If changed state
-    (changed-state {:init "passed"} 
-      ; and the state in passed - resolve
-      (where (state "passed") (:resolve pd)))
+; If changed state
+*(changed-state {:init "passed"} 
+* ; and the state in passed - resolve
+* (where (state "passed") (:resolve pd)))
 
-    ; If the state of the event is failed
-*   (where (state "failed")
-*    ; group by host120
-*     ; pass only one event in 60 seconds
-*     (by [:host :service] 
-*       (throttle 1 60 (:trigger pd))))))
+; If the state of the event is failed
+(where (state "failed")
+  ; group by host and service fields
+  ; pass only one event in 60 seconds
+  (by [:host :service] 
+    (throttle 1 60 (:trigger pd))))))
+```
+]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch - throttled
+  ]
+.right-column[
+  ### .title[Avoiding throttling]
+  *Sometimes, when things break, they submit a *ton* of events.*   
+  ```clojure
+; If changed state
+(changed-state {:init "passed"} 
+  ; and the state in passed - resolve
+  (where (state "passed") (:resolve pd)))
+
+; If the state of the event is failed
+*(where (state "failed")
+* ; group by host and service fields
+* ; pass only one event in 60 seconds
+* (by [:host :service] 
+*   (throttle 1 60 (:trigger pd))))))
 ```
 ]
 ---
 template: inverse
-## How can I ignore spikes (statistical alert)?
+# How can I ignore spikes (statistical alert)?
 ![Prototypal Inheritance 2](img/spike.png)
 ---
 .left-column[
   ## Probes and tests
   ### Simple test
-  ### Test dispatch
   ### Test dispatch - throttled
   ### CPU spikes
   ]
@@ -581,7 +482,6 @@ If >30% failed - Trigger
 .left-column[
   ## Probes and tests
   ### Simple test
-  ### Test dispatch
   ### Test dispatch - throttled
   ### CPU spikes
   ]
@@ -610,7 +510,6 @@ If >30% failed - Trigger
 .left-column[
   ## Probes and tests
   ### Simple test
-  ### Test dispatch
   ### Test dispatch - throttled
   ### CPU spikes
   ]
@@ -635,7 +534,13 @@ If >30% failed - Trigger
        (pagerduty-test-dispatch key)))
 ```
 ]
---
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ### Test dispatch - throttled
+  ### CPU spikes
+  ]
 .right-column[
 ### .title[Usage]
 ```clojure
@@ -647,47 +552,9 @@ If >30% failed - Trigger
 ]
 ---
 template: inverse
-## Visualize
+# Visualize
 ![Prototypal Inheritance 2](img/bathman.jpeg)
 ---
-.left-column[
-  ## Visualize
-  ### - Stream to ELK
-  ]
-.right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
-]
----
-.left-column[
-  ## Visualize
-  ### - Stream to ELK
-  ]
-.right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
-- http://github.com/forter/georg   
-
-
-![Prototypal Inheritance 2](img/d3_storm.png)
-]
----
-.left-column[
-  ## Visualize
-  ### - Stream to ELK
-  ]
-.right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
-- http://github.com/forter/georg
-- http://github.com/forter/riemann-testng-listener   
-
-
-
-![Prototypal Inheritance 2](img/github.png)
-]
----
-name: visualize
 .left-column[
   ## Visualize
   ### - Stream to ELK
@@ -710,19 +577,19 @@ name: visualize
 ![Prototypal Inheritance 2](img/freestyle.png)
 ]
 ---
+template: inverse
+# Where can I find my events?
+##\*prod\* ?  
+##\*nimbus\* ?  
+##\*merchantSanity\* ?  
+---
 .left-column[
 ## Visualize
 ### - Stream to ELK
 ### - Prepare for ELK
 ]
 .right-column[
-### .title[How do I query?]
-\*prod\* ?  
-\*nimbus\* ?  
-\*merchantSanity\* ?  
-]
---
-.right-column[
+### Where can I find my events?
 `branch` : `prod`   
 `role` : `nimbus`   
 `deployitme` : `2015-07-19T1918`   
@@ -731,13 +598,13 @@ name: visualize
 .right-column[
 ```json
 {
-* "service": "prod-nimbus-instance-2015-07-19T1918 df-mnt/percent_bytes-free",
-  "host": "ip-10-139-118-128",
-  "metric": 100,
-  "tags": ["collectd"],
-  "time": "2015-07-19T16:45:58.000Z",
-  "ttl": 240,
-  "plugin": "df"
+*"service": "prod-nimbus-instance-2015-07-19T1918 df-mnt/percent",
+"host": "ip-10-139-118-128",
+"metric": 100,
+"tags": ["collectd"],
+"time": "2015-07-19T16:45:58.000Z",
+"ttl": 240,
+"plugin": "df"
 }
 ```
 So lets split the service field !  
@@ -755,9 +622,10 @@ So lets split the service field !
   (and
     (not (tagged-any ["kibanaIgnore"]))
     (not (state "expired")))
-*   (enrich (logstash {:host "127.0.0.1"
-               :pool-size 20
-               :claim-timeout 0.2}))
+*   (enrich
+      (logstash {:host "127.0.0.1"
+                 :pool-size 20
+                 :claim-timeout 0.2}))
 ```
 ]
 ---
@@ -771,22 +639,22 @@ So lets split the service field !
 ### .title[Enrich]
 ```clojure
 (defn enrich
-  "Parse environment settings from service name prefix"
-  [& children]
-    (apply smap
-      (fn stream [event]
-        (let [
-*         regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
-*         [all branch role deploytime subservice] (re-find #regex (:service event))
-*         is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
-          ]
-            (assoc event :env        (str branch "-" deploytime)
-                         :branch     branch
-                         :deploytime deploytime
-                         :role       role
-                         :subservice subservice
-                         :test is-test)))
-    children))
+ "Parse environment settings from service name prefix"
+ [& children]
+ (apply smap
+  (fn stream [event]
+   (let [
+*   regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
+*   [all branch role deploytime subservice] (re-find #regex (:service event))
+*   is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
+    ]
+     (assoc event :env        (str branch "-" deploytime)
+                  :branch     branch
+                  :deploytime deploytime
+                  :role       role
+                  :subservice subservice
+                  :test is-test)))
+  children))
 ```
 ]
 ---
@@ -800,22 +668,22 @@ So lets split the service field !
 ### .title[Enrich]
 ```clojure
 (defn enrich
-  "Parse environment settings from service name prefix"
-  [& children]
-    (apply smap
-      (fn stream [event]
-        (let [
-          regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
-          [all branch role deploytime subservice] (re-find #regex (:service event))
-          is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
-          ]
-*           (assoc event :env        (str branch "-" deploytime)
-*                        :branch     branch
-*                        :deploytime deploytime
-*                        :role       role
-*                        :subservice subservice
-*                        :test is-test)))
-    children))
+ "Parse environment settings from service name prefix"
+ [& children]
+ (apply smap
+  (fn stream [event]
+   (let [
+    regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
+    [all branch role deploytime subservice] (re-find #regex (:service event))
+    is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
+    ]
+*    (assoc event :env        (str branch "-" deploytime)
+*                 :branch     branch
+*                 :deploytime deploytime
+*                 :role       role
+*                 :subservice subservice
+*                 :test is-test)))
+  children))
 ```
 ]
 
@@ -828,37 +696,64 @@ So lets split the service field !
 
 .right-column[
 ### .title[Enrich]
-```clojure
-(defn enrich
-  "Parse environment settings from service name prefix"
-  [& children]
-    (apply smap
-      (fn stream [event]
-        (let [
-          regex "^(.*?\-feature|prod)\-([\w\-]+)\-instance\-(\w+\-\w+\-\w+).(.*)"
-          [all branch role deploytime subservice] (re-find #regex (:service event))
-          is-test (not (nil? (re-find #"^(1234|5678)" (:sessionId event))))
-          ]
-            (assoc event :env        (str branch "-" deploytime)
-                         :branch     branch
-                         :deploytime deploytime
-                         :role       role
-                         :subservice subservice
-                         :test is-test)))
-    children))
-```
 ```json
 {
-  "service": "prod-nimbus-instance-2015-07-19T1918/df-mnt/percent_bytes-free",
-* "env": "prod-2015-07-19T1918",
-* "branch": "prod",
-* "deploytime": "2015-07-19T1918",
-* "role": "nimbus",
-* "subservice": "df-mnt/percent_bytes-free",
-  "host": "ip-10-139-118-128",
-  "metric": 100
+"service": "prod-nimbus-instance-2015-07-19T1918/df-mnt/percent_bytes-free",
+*"env": "prod-2015-07-19T1918",
+*"branch": "prod",
+*"deploytime": "2015-07-19T1918",
+*"role": "nimbus",
+*"subservice": "df-mnt/percent_bytes-free",
+"host": "ip-10-139-118-128",
+"metric": 100
 }
 ```
+]
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ### - Prepare for ELK
+  ### - Result
+
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+]
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ### - Prepare for ELK
+  ### - Result
+
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+- http://github.com/forter/georg   
+
+
+![Prototypal Inheritance 2](img/d3_storm.png)
+]
+---
+.left-column[
+  ## Visualize
+  ### - Stream to ELK
+  ### - Prepare for ELK
+  ### - Result
+
+  ]
+.right-column[
+### .title[Sending events from the system]
+- http://github.com/forter/riemann-storm-monitor
+- http://github.com/forter/georg
+- http://github.com/forter/riemann-testng-listener   
+
+
+
+![Prototypal Inheritance 2](img/github.png)
 ]
 ---
 .left-column[
@@ -920,6 +815,10 @@ So lets split the service field !
 ![Prototypal Inheritance 2](img/filter_test.png)
 ]
 ---
+template: inverse
+# Ignore irrelevant old prod alerts
+## / Maintenance
+---
 .left-column[
 ## Back to tests
 ### - Maintenance
@@ -927,7 +826,6 @@ So lets split the service field !
 .right-column[
 ### .title[Maintenance Mode]
 ]
---
 .right-column[
 - Sending "maintenance-mode" event
 - Riemann query its own index for the "maintenance-mode" event  
@@ -948,8 +846,8 @@ Enable:
 .right-column[
 And usage:
 ```clojure
-(where  (and (state "failed")
-            (not (maintenance-mode (str (:env event) " maintenance-mode"))))
+(where (and (state "failed")
+*           (not (maintenance-mode (str (:env event) " maintenance-mode"))))
         (:trigger pd))
 ```
 ]
@@ -957,38 +855,10 @@ And usage:
 .left-column[
   ## Back to tests
   ### - Maintenance
-  ### - Avoiding throttling
-  ### - Manual resolve
+  ### - Heartbeat alerts
   ]
 .right-column[
-  ### .title[Manual resolve events]
-  ```clojure
-(defn pagerduty-manual-resolve
-   "Constructs a pagerduty stream which triggers"
-   "fatal alerts that needs manual resolution"
-   [key]
-   (enrich
-     (let [pd (custom-pagerduty key)]
-         (where (not (maintenance-mode (str (:env event) " maintenance-mode")))
-           (throttle 1 60
-              (:trigger pd))))))
-  ```
-
-```clojure
-(where (tagged "fatal-exception")
-  (pagerduty-manual-resolve "46582d452e1511e58"))
-```
-]
----
-.left-column[
-  ## Back to tests
-  ### - Maintenance
-  ### - Avoiding throttling
-  ### - Manual resolve
-  ### - Periodic reporters
-  ]
-.right-column[
-  ### .title[Periodic reporters]
+  ### .title[Heartbeat alerts]
   ```clojure
 (defn pagerduty-cron-expiration
 "Constructs a pagerduty stream which resolves"
@@ -997,7 +867,7 @@ And usage:
 (let [pd (custom-pagerduty key)]
   (where (expired? event)
     (with {:state "failed"
-           :description "TTL Expired. Check that the cron service is running."}
+           :description "TTL Expired. Check that the cron service"}
         (pagerduty-test-dispatch key))
     (else
         (pagerduty-test-dispatch key)))))
@@ -1033,7 +903,7 @@ And usage:
   ## aggregations
   ]
 .right-column[
-  ### .title[Aggrigate throughput events]
+  ### .title[Aggregate throughput events]
   Lots of same event, want to sum them/ count them/ filter the max
 ```clojure
 ; aggregate max latency for throughput latency events
@@ -1056,7 +926,7 @@ And usage:
   ## aggregations
   ]
 .right-column[
-  ### .title[Aggrigate throughput events]
+  ### .title[Aggregate throughput events]
   Lots of same event, want to sum them/ count them/ filter the max
 ```clojure
 ; aggregate max latency for throughput latency events
