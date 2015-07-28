@@ -31,10 +31,13 @@
       .footnote {
         position: absolute;
         bottom: 1em;
-        font-size: 18px;
+        font-size: 14px;
+        color: #ADB7BA;
+        bottom: 12px;
+        left: 20px;
       }
       li p { line-height: 1.25em; }
-      .buzz { color: #007CBF;}
+      .buzz {color: #007CBF;}
       .cyan { color: #2EC4B6;}
       .red   { color: #fa0000; }
       .title {color: #02314A;}
@@ -44,8 +47,12 @@
       .bg-aphyr {
         background-image:url(img/aphyr.jpeg);
       }
-      a, a > code {
+      code {
         color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      a {
+        color: #F65454;
         text-decoration: none;
       }
       code {
@@ -64,6 +71,7 @@
       .pull-right {
         float: right;
         width: 43%;
+        font-size: 30px;
       }
       .pull-right ~ p {
         clear: both;
@@ -77,11 +85,14 @@
       }
       .inverse {
         background: #02314A;
-        color: #03477F;
+        color: #EEA018;
         text-shadow: 0 0 20px #333;
       }
+      .orange {
+        color: #EEA018;
+      }
       .inverse h1, .inverse h2 {
-        color: #f3f3f3;
+        color: #EEA018;
         line-height: 0.8em;
       }
 
@@ -139,7 +150,7 @@
         width: 82%;
         float: left;
         top: 20%;
-        font-size: 24px;
+        font-size: 30px;
       }
     </style>
   </head>
@@ -152,18 +163,76 @@ class: center, middle, inverse
 #(Monitoring (and
 #(alerting (with
 # riemann))))
-[.cyan[Moshe Zada@Forter]]
+##.cyan[Moshe Zada@Forter]
+---
+# Riemann - event stream processor
+# think pipes
+![](img/pipes.jpeg)
 ---
 layout: false
+.left-column[
+  ## In the pipeline
+  ### Intro
+]
+.right-column[
+### .title[Intro]
+  - About Forter
+  - Low latency
+  ]
+
+---
+layout: false
+.left-column[
+  ## In the pipeline
+  ### Intro
+  ### Basic alerts
+]
+.right-column[
+### .title[Basic Alerts]
+- Implement simple state machine
+- Throttled alert
+- Ignore spikes
+  ]
+---
+layout: false
+.left-column[
+  ## In the pipeline
+  ### Intro
+  ### Basic alerts
+  ### Visualize
+]
+.right-column[
+### .title[Visualize]
+- Stream to ELK
+- Event enrichment
+- Showoff
+  ]
+---
+layout: false
+.left-column[
+  ## In the pipeline
+  ### Intro
+  ### Basic alerts
+  ### Visualize
+  ### Aggregation
+]
+.right-column[
+### .title[Aggregation]
+- Sum/ Count/ Max batch of events
+- Monitor browser javascript
+  ]
+---
+template: inverse
+# Lets start
+---
 .left-column[
   ## riemann@ forter
   ### Who am I
 ]
 .right-column[
 ### .title[Moshe Zada]
-  - .buzz[Problem solver]@Forter
-  - Works at Forter for 1 year
-  - Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack
+.buzz[Problem solver]@Forter    
+Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack Among other stuff   
   ]
 ---
 .left-column[
@@ -173,11 +242,45 @@ layout: false
 ]
 .right-column[
 ### .title[Forter]
-Forter delivers a plug and play technology which allows online merchants to get a simple approve/decline answer for every transaction.
-
-The company is based in Tel Aviv, Israel.]
+![](img/decline.png)
+]
+---
+.left-column[
+  ## riemann@ forter
+  ### Who am I
+  ### And where do I work
+]
+.right-column[
+.pull-left[
+![](img/approve.png)
+]
+.pull-right[
+### Story
+Sean is an **officer**, serving in Rwanda.   
+His shipping address matches the **pattern of diplomat**   
+mailboxes for **US embassies** and   
+his billing address is still linked to his **old college accommodation**.
+]
+]
+---
+.left-column[
+  ## riemann@ forter
+  ### Who am I
+  ### And where do I work
+]
+.right-column[
+### We can catch 80% of online thieves before they even get to checkout
 ![Prototypal Inheritance 2](img/ocean.jpg)
-
+]
+---
+.left-column[
+  ## riemann@ forter
+  ### Who am I
+  ### And where do I work
+]
+.right-column[
+  ### How latency effects forter?
+  ]
 ---
 .left-column[
   ## riemann@ forter
@@ -187,47 +290,14 @@ The company is based in Tel Aviv, Israel.]
 
 ]
 .right-column[
-### .title[Tech@Forter]
+### .title[Forter's low-latency stack]
+  - Using .buzz[Storm] and .buzz[spark] for transactions stream proccesing
+  - .buzz[Couchbase], .buzz[Elasticsearch], .buzz[Redis], .buzz[MySQL] as datastores
   - Immutable images
   - Averege of 4 production deployments in single day
-  - Every environment has its own "probe-machine" (even feature branches)
-  - Using .buzz[Storm] for transactions and click stream proccesing
-  - .buzz[Couchbase], .buzz[Elasticsearch], .buzz[Redis], .buzz[MySQL] as datastores
   - Using .buzz[ELK] for visabillity
-  - .buzz[PagerDuty] as alerting and on-call scheduling
   ]
   .left-column[![Prototypal Inheritance 2](img/overall_latency.png)]
----
-.left-column[
-  ## riemann@ forter
-  ### Who am I
-  ### And where do I work
-  ### Tech
-  ### How latency effect Forter
-  ]
-.right-column[
-### .title[Realtime DAAS]
-]
----
-.left-column[
-  ## riemann@ forter
-  ### Who am I
-  ### And where do I work
-  ### Tech
-  ### How latency effect Forter
-  ### Two days before
-]
-.right-column[
-### .title[Two days before (the first) customer what can go wrong ?]
-- Running on ec2, no failover plan 
-- Developer SSH into the production machine
-- Developer changes DB schema
-- Analyst changes stored procedures
-- Analyst run long running queries on DB for research
-- 3rd party API may stop working
-- Exceptions written to local log file
-
-]
 ---
 template: inverse
 
@@ -235,30 +305,31 @@ template: inverse
 ---
 .left-column[
 ## Basic Concepts
-### - Riemann
-.footnote[riemann as pipes]
+### - Who is behind riemann?
 ]
 .right-column[
-### .title[Riemann is an event stream processor.]
-Just handled an HTTP request?  
--> **Send an event with the time it took.**  
-Caught an exception?  
--> **Send an event with the stacktrace.**  
-]
+### .title[Who is behind riemann?]]
 --
 .right-column[
+### This dude]
+.pull-left[
 ![Prototypal Inheritance 2](img/aphyr.jpeg)
+]
+--
+.pull-right[
+- aphyr - Kyle Kingsbury
+- The one from "call me maybe"
+- Works at stripe
 ]
 ---
 .left-column[
 ## Basic Concepts
-### - Riemann
+### - Who is behind riemann?
 ### - Event
 ]
 .right-column[
 ### .title[Events]
 - Events are just structs.
-- They're sent over Protocol Buffers
 - and in Riemann are treated as immutable maps.
 
 
@@ -286,12 +357,12 @@ message Attribute {
 ---
 .left-column[
   ## Basic Concepts
-### - Riemann
+### - Who is behind riemann?
 ### - Event
 ### - Examples
 ]
 .right-column[
-### .title[Sample events]
+### .title[Sample event]
 * Collectd event
 ```json
 {
@@ -311,7 +382,7 @@ message Attribute {
 ---
 .left-column[
   ## Basic Concepts
-### - Riemann
+### - Who is behind riemann?
 ### - Event
 ### - Examples
 ### - The index
@@ -322,15 +393,14 @@ The index is a table of the current state of all services tracked by Riemann.
 
 |        key          |                      event                             |
 |---------------------|:------------------------------------------------------:|
-| 10.0.0.1-redis-free | {.. "metric":"5", "service":"10.0.0.1-redis-free" .. } |
-| 10.0.0.2-cache-miss | {.. "metric":"6", "service":"10.0.0.1-redis-free" .. } |
-| 10.0.0.2-cache-hit  | {.. "metric":"6", "service":"10.0.0.1-redis-free" .. } |
-
+| 10.0.0.1-redis-free | { .."metric":"5", "service":"redis-free".. }           |
+| 10.0.0.2-cache-miss | { .."metric":"6", "service":"cache-miss".. }           |
+| 10.0.0.2-cache-hit  | { .."metric":"6", "service":"cache-hit".. }            |
 ]
 ---
 .left-column[
   ## Basic Concepts
-### - Riemann
+### - Who is behind riemann?
 ### - Event
 ### - Examples
 ### - The index
@@ -340,9 +410,12 @@ The index is a table of the current state of all services tracked by Riemann.
 ### .title[TTL]
 Events entered into the index have a :ttl field which indicate how long that event is valid for.
 
-{"service": "foobar", "ttl": 60, state:"pass"} -> "index"   
-after 60 secs   
-{"service": "foobar", "ttl": 60, state:"**expired**"} -> "index"
+`{"service": "foobar", "ttl": 60, state:"pass"}` -> "index"   
+]
+--
+.right-column[
+### After 60 secs   
+`{"service": "foobar", "ttl": 60, state:"expired"}` -> "index"
 ]
 ---
 template: inverse
@@ -406,7 +479,7 @@ template: inverse
   ### Test dispatch - throttled
   ]
 .right-column[
-  ### .title[Avoiding throttling]
+  ### .title[Throttle alerts]
   *Sometimes, when things break, they submit a *ton* of events.*   
   ```clojure
 ; If changed state
@@ -429,7 +502,7 @@ template: inverse
   ### Test dispatch - throttled
   ]
 .right-column[
-  ### .title[Avoiding throttling]
+  ### .title[Throttle alerts]
   *Sometimes, when things break, they submit a *ton* of events.*   
   ```clojure
 ; If changed state
@@ -715,28 +788,12 @@ So lets split the service field !
   ### - Stream to ELK
   ### - Prepare for ELK
   ### - Result
-
   ]
 .right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
+## .title[Storm topology with timing]
 ]
----
-.left-column[
-  ## Visualize
-  ### - Stream to ELK
-  ### - Prepare for ELK
-  ### - Result
-
-  ]
-.right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
-- http://github.com/forter/georg   
-
-
 ![Prototypal Inheritance 2](img/d3_storm.png)
-]
+
 ---
 .left-column[
   ## Visualize
@@ -746,15 +803,11 @@ So lets split the service field !
 
   ]
 .right-column[
-### .title[Sending events from the system]
-- http://github.com/forter/riemann-storm-monitor
-- http://github.com/forter/georg
-- http://github.com/forter/riemann-testng-listener   
-
-
-
+## .title[Github intigation]
 ![Prototypal Inheritance 2](img/github.png)
 ]
+---
+![Prototypal Inheritance 2](img/timeline.png)
 ---
 .left-column[
 ## Visualize
@@ -800,20 +853,9 @@ So lets split the service field !
 ![Prototypal Inheritance 2](img/cpu.png)
 ]
 ---
-.left-column[
-## Visualize
-### - Stream to ELK
-### - Prepare for ELK
-### - Result
-]
-.right-column[
-### .title[Filters]
-![Prototypal Inheritance 2](img/filter_prod.png)
-]
---
-.right-column[
-![Prototypal Inheritance 2](img/filter_test.png)
-]
+template: inverse
+# BTW its all open source -
+# http://github.com/forter
 ---
 template: inverse
 # Ignore irrelevant old prod alerts
@@ -828,18 +870,13 @@ template: inverse
 ]
 .right-column[
 - Sending "maintenance-mode" event
-- Riemann query its own index for the "maintenance-mode" event  
-  if exist - ignore
-]
---
-.right-column[
+- Riemann query its own index for the "maintenance-mode" event if exist - ignore
+
 Enable:
 ```json
-{
-  "service": "prod-2015-07-19T1918 maintenance-mode",
+{ "service": "prod-2015-07-19T1918 maintenance-mode",
   "ttl": 120,
-  "state": "active"
-}
+  "state": "active" }
 ```
 ]
 --
@@ -849,6 +886,53 @@ And usage:
 (where (and (state "failed")
 *           (not (maintenance-mode (str (:env event) " maintenance-mode"))))
         (:trigger pd))
+```
+]
+---
+template: inverse
+# How can I check heartbeat?
+---
+.left-column[
+  ## Back to tests
+  ### - Maintenance
+  ### - Heartbeat alerts
+  ]
+.right-column[
+  ### .title[Heartbeat alerts]
+  ```clojure
+(defn pagerduty-cron-expiration
+"Constructs a pagerduty stream which resolves"
+"and triggers alerts based on event expiration"
+[key]  
+(let [pd (custom-pagerduty key)]
+* (where (expired? event)
+    (with {:state "failed"
+           :description "TTL Expired. Check that the cron service"}
+        (pagerduty-test-dispatch key))
+    (else
+        (pagerduty-test-dispatch key)))))
+```
+]
+---
+.left-column[
+  ## Back to tests
+  ### - Maintenance
+  ### - Heartbeat alerts
+  ]
+.right-column[
+  ### .title[Heartbeat alerts]
+  ```clojure
+(defn pagerduty-cron-expiration
+"Constructs a pagerduty stream which resolves"
+"and triggers alerts based on event expiration"
+[key]  
+(let [pd (custom-pagerduty key)]
+  (where (expired? event)
+*   (with {:state "failed"
+*          :description "TTL Expired. Check that the cron service"}
+        (pagerduty-test-dispatch key))
+    (else
+        (pagerduty-test-dispatch key)))))
 ```
 ]
 ---
@@ -869,38 +953,17 @@ And usage:
     (with {:state "failed"
            :description "TTL Expired. Check that the cron service"}
         (pagerduty-test-dispatch key))
-    (else
-        (pagerduty-test-dispatch key)))))
+*   (else
+*       (pagerduty-test-dispatch key)))))
 ```
 ]
 ---
-.left-column[
-  ## aggregations
-  ]
-.right-column[
-  ### .title[Aggregate throughput events]
-  Lots of same event, want to sum them/ count them/ filter the max]
---
-.right-column[
-```clojure
-; aggregate max latency for throughput latency events
-(tagged "latency"·
- (fixed-time-window 2
-    (smap folds/maximum
-      (apply adjust [:service str " maximum"]·
-        children))))
-
- ; aggregate sum throughput events
-(tagged-any ["throughput", "bulk-size"]
- (fixed-time-window 2
-   (smap folds/sum
-       (apply adjust [:service str " sum"]
-        children))))
-```
-]
+template: inverse
+# Event aggregation
 ---
 .left-column[
-  ## aggregations
+  ## Aggregations
+  ### Sum / Max
   ]
 .right-column[
   ### .title[Aggregate throughput events]
@@ -917,13 +980,14 @@ And usage:
 *(tagged-any ["throughput", "bulk-size"]
 * (fixed-time-window 2
    (smap folds/sum
-       (apply adjust [:service str " sum"]
+      (apply adjust [:service str " sum"]
         children))))
 ```
 ]
 ---
 .left-column[
-  ## aggregations
+  ## Aggregations
+  ### Sum / Max
   ]
 .right-column[
   ### .title[Aggregate throughput events]
@@ -940,37 +1004,38 @@ And usage:
 (tagged-any ["throughput", "bulk-size"]
   (fixed-time-window 2
 *  (smap folds/sum
-       (apply adjust [:service str " sum"]
+      (apply adjust [:service str " sum"]
 *       children))))
 ```
 ]
 ---
 .left-column[
-  
+  ## Aggregations
+  ### Sum / Max
+  ### Group by browser version
   ]
 .right-column[
-### TODO
-* Add problem slide  
-* Change to forter font  
-* Make incremental count
-* bigger font (18+)
+  ### .title[Group by browser version]
+  - Timeouts
+  - Exceptions by browser
+  - Exception aggregation
+  - Monitoring the progress of distribution 
 ]
 ---
----
----
----
----
----
----
----
----
----
-name: last-page
 template: inverse
+# ????
 
-## That's all folks (for now)!
+---
+template: inverse
+# Sounds cool?
+--
 
-Slideshow created using [remark](http://github.com/gnab/remark).
+# We are hiring !
+--
+
+# .orange[Mail:] [moshe@forter.com](moshe@forter.com)   
+# .orange[GitHub:] [MosheZada](moshe@forter.com)   
+.footnote[Slideshow created using [remark](http://github.com/gnab/remark).]
     </textarea>
 
     <script src="remark-latest.min.js"></script>
@@ -984,7 +1049,8 @@ Slideshow created using [remark](http://github.com/gnab/remark).
           highlightLanguage: 'clojure',
           ratio: '14:9',
           scroll: true,
-          highlightLines: true
+          highlightLines: true,
+          countIncrementalSlides: false
         }) ;
     </script>
     <script>
