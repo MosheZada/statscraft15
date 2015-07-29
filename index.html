@@ -205,12 +205,26 @@ layout: false
 - Showoff
   ]
 ---
+.left-column[
+  ## In the pipeline
+  ### Intro
+  ### Basic alerts
+  ### Visualize
+  ### Back to tests
+]
+.right-column[
+### .title[Back to tests]
+- Maintenance mode
+- Heartbeat alerts
+  ]
+---
 layout: false
 .left-column[
   ## In the pipeline
   ### Intro
   ### Basic alerts
   ### Visualize
+  ### Back to tests
   ### Aggregation
 ]
 .right-column[
@@ -229,7 +243,7 @@ template: inverse
 .right-column[
 ### .title[Moshe Zada]
 .buzz[Problem solver]@Forter    
-Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack Among other stuff   
+Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack among other stuff   
   ]
 ---
 .left-column[
@@ -248,16 +262,9 @@ Responsible for entire .buzz[monitoring], .buzz[CI] and .buzz[CD] stack Among ot
   ### And where do I work
 ]
 .right-column[
-.pull-left[
+
 ![](img/approve.png)
-]
-.pull-right[
-### Story
-Sean is an **officer**, serving in Rwanda.   
-His shipping address matches the **pattern of diplomat**   
-mailboxes for **US embassies** and   
-his billing address is still linked to his **old college accommodation**.
-]
+
 ]
 ---
 .left-column[
@@ -288,10 +295,9 @@ his billing address is still linked to his **old college accommodation**.
 ]
 .right-column[
 ### .title[Forter's low-latency stack]
-  - Using .buzz[Storm] and .buzz[spark] for transactions stream proccesing
+  - Using .buzz[Storm] and .buzz[Spark] for transactions stream proccesing
   - .buzz[Couchbase], .buzz[Elasticsearch], .buzz[Redis], .buzz[MySQL] as datastores
   - Immutable images
-  - Averege of 4 production deployments in single day
   - Using .buzz[ELK] for visabillity
   ]
   .left-column[![Prototypal Inheritance 2](img/overall_latency.png)]
@@ -360,22 +366,69 @@ message Attribute {
 ]
 .right-column[
 ### .title[Sample event]
-* Collectd event
+Collectd event
 ```json
 {
-    "service": "prod-redis-n01 Free memory",
-    "host": "10.0.0.1",
-    "description": "total memory free in bytes",
-    "state": nil,
-    "ttl": 60,
-    "metric": 1024,
-    "tags": ["collectd",
-              "redis",
-              "infra"]
+* "service": "prod-redis-n01 Free memory",
+  "host": "10.0.0.1",
+  "description": "total memory free in bytes",
+  "state": nil,
+  "ttl": 60,
+  "metric": 1024,
+  "tags": ["collectd",
+           "redis",
+           "infra"]
 }
 ```
 ]
-
+---
+.left-column[
+  ## Basic Concepts
+### - Who is behind riemann?
+### - Event
+### - Examples
+]
+.right-column[
+### .title[Sample event]
+Collectd event
+```json
+{
+  "service": "prod-redis-n01 Free memory",
+  "host": "10.0.0.1",
+  "description": "total memory free in bytes",
+  "state": nil,
+  "ttl": 60,
+* "metric": 1024,
+  "tags": ["collectd",
+           "redis",
+           "infra"]
+}
+```
+]
+---
+.left-column[
+  ## Basic Concepts
+### - Who is behind riemann?
+### - Event
+### - Examples
+]
+.right-column[
+### .title[Sample event]
+Collectd event
+```json
+{
+  "service": "prod-redis-n01 Free memory",
+  "host": "10.0.0.1",
+  "description": "total memory free in bytes",
+  "state": nil,
+  "ttl": 60,
+  "metric": 1024,
+* "tags": ["collectd",
+*          "redis",
+*          "infra"]
+}
+```
+]
 ---
 .left-column[
   ## Basic Concepts
@@ -425,7 +478,7 @@ template: inverse
   ]
 .right-column[
 ### .title[merchantSanity]
-Riemann will forward to pagerduty only events that they state was chenged
+Riemann will forward to pagerduty only events that their state was changed
 ```json
 {
  "service": "prod-gateway-n01 MerchantSanity system test",
@@ -450,8 +503,8 @@ Riemann will forward to pagerduty only events that they state was chenged
 .right-column[
 ### .title[The code behind]
   ```clojure    
-(tagged "merchantSanity"
-  pagerduty-test-dispatch "asdasdad")
+*(tagged "merchantSanity"
+* pagerduty-test-dispatch "asdasdad")
 
 (defn pagerduty-test-dispatch
  "Constructs a pagerduty stream which resolves and"
@@ -463,8 +516,59 @@ Riemann will forward to pagerduty only events that they state was chenged
       (:resolve pd))
     (where (state "failure")
       (:trigger pd))))
-```
-        ]
+```]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ]
+.right-column[
+  ### .title[Flow]
+  "probe machine" --> "riemann" --> "pagerduty"
+]
+.right-column[
+### .title[The code behind]
+  ```clojure    
+(tagged "merchantSanity"
+  pagerduty-test-dispatch "asdasdad")
+
+(defn pagerduty-test-dispatch
+ "Constructs a pagerduty stream which resolves and"
+ "triggers alerts based on test failure"
+ [key]
+ (let [pd (pagerduty "merchantSanity-service-key")]
+* (changed-state
+*   (where (state "ok")
+*     (:resolve pd))
+    (where (state "failure")
+      (:trigger pd))))
+```]
+---
+.left-column[
+  ## Probes and tests
+  ### Simple test
+  ]
+.right-column[
+  ### .title[Flow]
+  "probe machine" --> "riemann" --> "pagerduty"
+]
+.right-column[
+### .title[The code behind]
+  ```clojure    
+(tagged "merchantSanity"
+  pagerduty-test-dispatch "asdasdad")
+
+(defn pagerduty-test-dispatch
+ "Constructs a pagerduty stream which resolves and"
+ "triggers alerts based on test failure"
+ [key]
+ (let [pd (pagerduty "merchantSanity-service-key")]
+  (changed-state
+    (where (state "ok")
+      (:resolve pd))
+*   (where (state "failure")
+*     (:trigger pd))))
+```]
 ---
 template: inverse
 # when things break, they submit a \*ton\* of events
@@ -780,6 +884,9 @@ So lets split the service field !
 ```
 ]
 ---
+template: inverse
+# Showoff
+---
 .left-column[
   ## Visualize
   ### - Stream to ELK
@@ -790,7 +897,6 @@ So lets split the service field !
 ## .title[Storm topology with timing]
 ]
 ![Prototypal Inheritance 2](img/d3_storm.png)
-
 ---
 .left-column[
   ## Visualize
@@ -815,16 +921,7 @@ So lets split the service field !
 .right-column[
 ### .title[Latency grouped by deploytime]
 ![Prototypal Inheritance 2](img/percentiles.png)
-]
----
-.left-column[
-## Visualize
-### - Stream to ELK
-### - Prepare for ELK
-### - Result
-]
-.right-column[
-### .title[Event count grouped by env]
+
 ![Prototypal Inheritance 2](img/byhost.png)
 ]
 ---
@@ -967,18 +1064,19 @@ template: inverse
   Lots of same event, want to sum them/ count them/ filter the max
 ```clojure
 ; aggregate max latency for throughput latency events
-*(tagged "latency"·
-* (fixed-time-window 2
-    (smap folds/maximum
-      (apply adjust [:service str " maximum"]·
-        children))))
+(by [:host :service]
+ (tagged "latency"·
+*  (fixed-time-window 2
+*    (smap folds/maximum
+       (apply adjust [:service str " maximum"]
+         children))))
 
  ; aggregate sum throughput events
-*(tagged-any ["throughput", "bulk-size"]
-* (fixed-time-window 2
-   (smap folds/sum
-      (apply adjust [:service str " sum"]
-        children))))
+ (tagged-any ["throughput", "bulk-size"]
+*  (fixed-time-window 2
+*   (smap folds/sum
+       (apply adjust [:service str " sum"]
+         children)))))
 ```
 ]
 ---
@@ -991,18 +1089,19 @@ template: inverse
   Lots of same event, want to sum them/ count them/ filter the max
 ```clojure
 ; aggregate max latency for throughput latency events
-(tagged "latency"·
-  (fixed-time-window 2
-*   (smap folds/maximum
-      (apply adjust [:service str " maximum"]·
-*       children))))
+(by [:host :service]
+ (tagged "latency"·
+   (fixed-time-window 2
+*    (smap folds/maximum
+       (apply adjust [:service str " maximum"]
+*        children))))
 
  ; aggregate sum throughput events
-(tagged-any ["throughput", "bulk-size"]
-  (fixed-time-window 2
-*  (smap folds/sum
-      (apply adjust [:service str " sum"]
-*       children))))
+ (tagged-any ["throughput", "bulk-size"]
+   (fixed-time-window 2
+*   (smap folds/sum
+       (apply adjust [:service str " sum"]
+*        children)))))
 ```
 ]
 ---
@@ -1016,7 +1115,8 @@ template: inverse
   - Timeouts
   - Exceptions by browser
   - Exception aggregation
-  - Monitoring the progress of distribution 
+  - Monitoring the progress of distribution  
+  - Deploying new CDN?
 ]
 ---
 template: inverse
